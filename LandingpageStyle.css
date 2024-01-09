@@ -1,0 +1,267 @@
+/* Importing Google font - Open Sans */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  
+}
+
+
+
+body {
+  height: 100vh;
+  width: 100%;
+ 
+
+ 
+
+  
+}
+
+
+header{
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  
+  /* background: rgba(0, 0, 0, 0.40); */
+  background-color: #000000;
+
+
+}
+
+
+
+.header {
+  position:relative ;
+  top: 0;
+  left: 0;
+  width: 100%;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  
+ 
+  
+  
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  
+}
+
+.navbar .logo a {
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar .links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 35px;
+}
+
+.navbar .links a {
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 0;
+  transition: 0.2s ease;
+}
+
+.navbar .links a:hover {
+  color: #05ff2f;
+  font-weight: bold;
+}
+
+.navbar .buttons a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 15px 0;
+  transition: 0.2s ease;
+}
+
+.navbar .buttons a:not(:last-child) {
+  margin-right: 30px;
+}
+
+.navbar .buttons .signin:hover {
+  color: #05ff2f;
+  font-weight: bold;
+  
+}
+
+.navbar .buttons .signup {
+ 
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  transition: 0.2s ease;
+  background-color: #20B486;
+  color: #f1ecec;
+}
+
+.navbar .buttons .signup:hover {
+  background-color: #066d17;
+  color: #fff;
+  padding: 12px 22px;
+ 
+  
+}
+
+#menu-toggle {
+  display: none;
+}
+
+#hamburger-btn {
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  order: 1;
+}
+
+
+.Mainsecton{
+  
+  height: 600px;
+  background-image: url('Image/Slider.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: blocks;
+ 
+  
+
+
+}
+
+.content{
+  padding: 100px 40px;
+  align-items: center;
+}
+
+h1{
+ font-size: 55px;
+  margin-left: 100px;
+  color: #ffffff;
+  text-align: center;
+}
+h2{
+  font-size: 53px;
+  margin-left: 100px;
+  color: #ffffff;
+  text-align: center;
+}
+p{
+  font-size: 18px;
+  margin-left: 100px;
+  color: #ffffff;
+  text-align: center;
+}
+
+ .btn {
+  font-size: 20px;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.2s ease;
+  text-decoration: none;
+  font-weight: bold;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+.btn {
+ 
+  margin-left: 660px;
+  background-color: #0bb35c;
+  color: #f9f9f9;
+  
+}
+
+.btn:hover {
+  background-color: rgb(15, 156, 15); 
+  color: #f1ecec;
+  padding: 17px 32px;
+  
+
+}
+
+
+.Courses{
+
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1023px) {
+  .navbar .logo a {
+    font-size: 1.5rem;
+  }
+
+  .links {
+    position: fixed;
+    left: -100%;
+    top: 75px;
+    width: 10%;
+    height:35vh;
+    padding-top: 40px;
+    background: #000000;
+    flex-direction: column;
+    transition: 0.3s ease;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+   
+  }
+
+  .navbar #menu-toggle:checked ~ .links {
+    left: 0;
+  }
+
+  .navbar #hamburger-btn {
+    display: block;
+  }
+.Mainsecton{
+  text-align: center;
+  margin: 0 auto 80px;
+}
+
+
+.Mainsecton h1{
+  font-size: 20px;
+ margin-top: 20px;
+  margin-left: 50px;
+}
+.Mainsecton h2{
+  font-size: 20px;
+ margin-top: 20px;
+  margin-left: 50px;
+}
+.Mainsecton h3{
+  font-size: 20px;
+ margin-top: 20px;
+  margin-left: 50px;
+}
+
+.Btn {
+  margin-left: 50px;
+  
+}
+.btn {
+ 
+  margin-left: 50px;
+ 
+}
+}
