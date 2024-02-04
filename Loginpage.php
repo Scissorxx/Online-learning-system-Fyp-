@@ -1,39 +1,32 @@
-<?php 
+<?php
+$message = false;
 
-// $showAlert = false;
- if($_SERVER["REQUEST_METHOD"]=="POST"){
-include 'php/dbconnect.php';
-// if(isset($_POST['submit'])){
-// $fullrname =$_POST["fullname"];
-// $username =$_POST["username"];
-$email =$_POST["email"];
-// $number =$_POST["number"];
-$password = $_POST["password"];
-// $confirmpassword =$_POST["confirmpassword"];
-// $exists=false;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'php/dbconnect.php';
 
-// $verifyEmail_query = mysqli_query($con,"SELECT email from userdetails where email ='$email' ");
-// if(mysqli_num_rows($verifyEmail_query)!=0){
-//  echo "<div class ='message'>
-//     <p>This email is used already.. try again!</p>
-//     </div>";
-//    echo "<a href ='JavaScript:self.history.back'> <button class ='btn'> Try again</button>";
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
+    $sql = "SELECT * FROM userdetail WHERE email = '$email' AND password = '$password'";
+    $result = mysqli_query($con, $sql);
 
-  $sql ="SELECT * from userdetails where email ='$email' AND password =$password" 
-  $result = mysqli_query($con,$sql);
-  if ($result){
-    $showAlert = true;
-  }
+    $row = mysqli_fetch_assoc($result);
 
+    if (is_array($row) && !empty($row)) {
+        session_start();
+        $_SESSION['valid'] = $row['email'];
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['number'] = $row['number'];
+        $_SESSION['email'] = $row['email'];
+
+        // Set success message
+        $successMessage = "Login successful! Redirecting...";
+    } else {
+        $message = true;
+    }
 }
-
-
-
-
- }
+?>
      
-     ?>
 
 
 
@@ -43,9 +36,11 @@ $password = $_POST["password"];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="loginpage.css">
+    <link rel="stylesheet" href="loginP.css">
     
     <script src="Script/LoginpageScript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
 
     <title>Login page</title>
 </head>
@@ -88,18 +83,62 @@ $password = $_POST["password"];
           <div class="pass">
             <a href="#">Forgot Password?</a>
           </div>
+          
+    <?php
+    if ($message) {
+       
+        echo "<div id='login-fail-message' class='message'>Email and password don't match</div>";
+        echo "<script>
+                // JavaScript to handle login failure message disappearance
+                $(document).ready(function () {
+                    // Hide the login failure message after 5 seconds
+                    setTimeout(function () {
+                        $('#login-fail-message').fadeOut();
+                    }, 3000);
+                });
+            </script>";
+    }
+
+    if (isset($successMessage)) {
+        echo "<div id='login-success-message' class='message'>$successMessage</div>";
+        echo "<script>
+                // JavaScript to handle delayed redirection and message disappearance
+                $(document).ready(function () {
+                    // Delayed redirection after 2 seconds
+                    setTimeout(function () {
+                        window.location.href = 'Dashboard.php';
+                    }, 2000);
+
+                    // Hide the login success message after 2 seconds
+                    setTimeout(function () {
+                        $('#login-success-message').fadeOut();
+                    }, 2000);
+                });
+            </script>";
+    }
+    ?>
+          
           <div class="field">
             <input type="submit" value="Continue">
           </div>
         </form>
+
        
         <div class="signup"><br>
           Don't have account?
           <a href="RegistrationPage.php">Signup Now</a>
         </div>
       </div>
+    
+      
+      
+     
+         
+
+     
      
     </Section>
+    
 
 
     

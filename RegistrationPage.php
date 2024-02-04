@@ -1,39 +1,42 @@
-<?php 
-
+<?php
 $showAlert = false;
- if($_SERVER["REQUEST_METHOD"]=="POST"){
-include 'php/dbconnect.php';
-// if(isset($_POST['submit'])){
-$fullrname =$_POST["fullname"];
-$username =$_POST["username"];
-$email =$_POST["email"];
-$number =$_POST["number"];
-$password = $_POST["password"];
-$confirmpassword =$_POST["confirmpassword"];
-$exists=false;
 
-// $verifyEmail_query = mysqli_query($con,"SELECT email from userdetails where email ='$email' ");
-// if(mysqli_num_rows($verifyEmail_query)!=0){
-//  echo "<div class ='message'>
-//     <p>This email is used already.. try again!</p>
-//     </div>";
-//    echo "<a href ='JavaScript:self.history.back'> <button class ='btn'> Try again</button>";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'php/dbconnect.php';
 
-if(($password ==$confirmpassword)&& $exists==false){
-  $sql ="INSERT INTO `userdetails` ( `fullname`, `username`, `number`, `email`, `password`, `dt`) VALUES ('$fullrname', '$username', '$number', '$email', '$password', current_timestamp())";
-  $result = mysqli_query($con,$sql);
-  if ($result){
-    $showAlert = true;
-  }
+    $fullrname = mysqli_real_escape_string($con, $_POST["fullname"]);
+    $username = mysqli_real_escape_string($con, $_POST["username"]);
+    $email = mysqli_real_escape_string($con, $_POST["email"]);
+    $number = mysqli_real_escape_string($con, $_POST["number"]);
+    $password = mysqli_real_escape_string($con, $_POST["password"]);
+    $confirmpassword = mysqli_real_escape_string($con, $_POST["confirmpassword"]);
 
+    // Check for duplicate username
+    $checkUsernameQuery = "SELECT * FROM `userdetail` WHERE `username`='$username'";
+    $resultUsername = mysqli_query($con, $checkUsernameQuery);
+    $numUsernameRows = mysqli_num_rows($resultUsername);
+
+    // Check for duplicate email
+    $checkEmailQuery = "SELECT * FROM `userdetail` WHERE `email`='$email'";
+    $resultEmail = mysqli_query($con, $checkEmailQuery);
+    $numEmailRows = mysqli_num_rows($resultEmail);
+
+    if ($numUsernameRows > 0) {
+        $errorMessage = "Username already exists. Please choose a different username.";
+    } elseif ($numEmailRows > 0) {
+        $errorMessage = "Email already registered. Please use a different email.";
+    } elseif ($password == $confirmpassword) {
+        $sql = "INSERT INTO `userdetail` (`fullname`, `username`, `number`, `email`, `password`, `dt`) VALUES ('$fullrname', '$username', '$number', '$email', '$password', current_timestamp())";
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            $successMessage = "Registration successful! Redirecting...";
+        }
+    } else {
+        $errorMessage = "Passwords do not match.";
+    }
 }
-
-
-
-
- }
-     
-     ?>
+?>
 
 
 <!DOCTYPE html>
@@ -42,8 +45,10 @@ if(($password ==$confirmpassword)&& $exists==false){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="RegistrationPage.css">
+    <link rel="stylesheet" href="Registratio.css">
     <script src="https://use.fontawesome.com/80976cfcfc.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <title>RegistrationPage</title>
 </head>
 <body>
@@ -78,7 +83,8 @@ if(($password ==$confirmpassword)&& $exists==false){
                 <div class="user-details">
                     
                   <div class="input-box">
-                    <span class="details"> <i class='bx bx-user'></i> Full Name</span>
+                  <!-- <i class='bx bx-user'></i> -->
+                    <span class="details">  Full Name</span>
                     
                     
                     <input type="text" name="fullname" id="fullname" placeholder="Enter your name" required>
@@ -104,6 +110,30 @@ if(($password ==$confirmpassword)&& $exists==false){
                     <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm your password" required>
                   </div>
                 </div>
+                <?php
+
+if (isset($errorMessage)) {
+  echo "<div id='error-message' class='message'>$errorMessage</div>";
+}
+
+    if (isset($successMessage)) {
+        echo "<div id='login-success-message' class='message'>$successMessage</div>";
+        echo "<script>
+                // JavaScript to handle delayed redirection and message disappearance
+                $(document).ready(function () {
+                    // Delayed redirection after 2 seconds
+                    setTimeout(function () {
+                        window.location.href = 'Loginpage.php';
+                    }, 2000);
+
+                    // Hide the login success message after 2 seconds
+                    setTimeout(function () {
+                        $('#login-success-message').fadeOut();
+                    }, 2000);
+                });
+            </script>";
+    }
+    ?>
                 <div class="button">
                   <input type="submit" name="submit" id="submit" value="Register">
                 </div>
