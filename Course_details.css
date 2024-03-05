@@ -1,12 +1,7 @@
-/* Reset some default styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
+    margin: 0;
 }
 
 .container {
@@ -20,18 +15,26 @@ body {
 
 h2 {
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 img {
     max-width: 100%;
     height: auto;
-    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #333;
+    margin-bottom: 10px;
 }
 
 p {
     color: #666;
-    margin-bottom: 10px;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 form {
@@ -49,4 +52,4 @@ button {
 
 button:hover {
     background-color: #45a049;
-}
+} */

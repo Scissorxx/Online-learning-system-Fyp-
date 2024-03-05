@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.backvideo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
+
+.Mainsecton {
+  padding: 150px 30px;
+  text-align: center;
+}
+
+.Mainsecton .content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.content .text {
+  margin-bottom: 50px;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.Mainsecton h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fffdfd;
+}
+
+.Mainsecton h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fafafa;
+}
+
+.Mainsecton p {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fafafa;
+}
+
+.Mainsecton .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #00ff37;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.Mainsecton .btn:hover {
+  background-color: #00b351;
+}
+
+.services {
+ margin-top: 50px;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-bottom: 20px; /* Add some space at the bottom for better visualization */
+  
+
+  
+}
+
+.services .card img {
+  width: 250px;
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+
+.cards {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: 55px;
+
+}
+
+.card {
+  display: inline-block;
+  width: 90%; /* Make the card width responsive */
+  max-width: 450px; /* Limit maximum width */
+  height: 400px;
+  margin: 10px;
+  border: 1px solid #040101;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.card p {
+  margin-top: 10px;
+  font-size: 16px;
+}

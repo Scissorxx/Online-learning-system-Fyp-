@@ -1,34 +1,77 @@
 <?php
 $message = false;
+$invalidEmail = false;
+$invalidPassword = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'php/dbconnect.php';
 
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    // Check if email and password are set in the POST data
+    if(isset($_POST["email"]) && isset($_POST["password"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
 
-    $sql = "SELECT * FROM userdetail WHERE email = '$email' AND password = '$password'";
-    $result = mysqli_query($con, $sql);
+        // Escape user inputs to prevent SQL injection
+        $email = mysqli_real_escape_string($con, $email);
 
-    $row = mysqli_fetch_assoc($result);
+        $sql = "SELECT * FROM userdetail WHERE email = '$email'";
+        $result = mysqli_query($con, $sql);
 
-    if (is_array($row) && !empty($row)) {
-        session_start();
-        $_SESSION['valid'] = $row['email'];
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['number'] = $row['number'];
-        $_SESSION['email'] = $row['email'];
+        // Check if the query executed successfully
+        if($result) {
+            // Check if there is a row returned from the query
+            if(mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
 
-        // Set success message
-        $successMessage = "Login successful! Redirecting...";
-    } else {
-        $message = true;
+                // Check if the user account is activated
+                if ($row["user_type"] == "Teacher" && $row["account_activation_hash"] != null) {
+                    session_start();
+                    $_SESSION['email'] = $row['email'];
+                    header("Location: activateTeacher-account.php");
+
+                    exit();
+                }
+
+                // Check if account activation hash is null
+                if ($row["account_activation_hash"] === null) {
+                    // Verify the password
+                    if (password_verify($password, $row['password'])) {
+                        session_start();
+                        $_SESSION['valid'] = $row['email'];
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['number'] = $row['number'];
+                        $_SESSION['email'] = $row['email'];
+                        $_SESSION['SN'] = $row['SN'];
+
+                        // Redirect based on user type
+                        switch ($row['user_type']) {
+                            case 'Admin':
+                                header("Location: admin_dashboard.php");
+                                break;
+                            case 'Teacher':
+                                header("Location: teacher_dashboard.php");
+                                break;
+                            case 'Student':
+                                header("Location: Dashboard.php");
+                                break;
+                        }
+                        exit(); // Terminate the script after redirection
+                    } else {
+                        $invalidPassword = true; // Password verification failed
+                    }
+                } else {
+                    $invalidEmail = true; // Email not found in database
+                }
+            } else {
+                $invalidEmail = true; // Email not found in database
+            }
+        } else {
+            // Handle database query error
+            echo "Error: " . mysqli_error($con);
+        }
     }
 }
 ?>
-     
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,108 +83,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <script src="Script/LoginpageScript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
- 
 
     <title>Login page</title>
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-          <h2 class="logo"><a href="#">Online Learning</a></h2>
-          <input type="checkbox" id="menu-toggle" />
-          <label for="menu-toggle" id="hamburger-btn">
+<header class="header">
+    <nav class="navbar">
+        <h2 class="logo"><a href="#">Online Learning</a></h2>
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" id="hamburger-btn">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
-          </label>
-          <ul class="links">
+        </label>
+        <ul class="links">
             <li><a href="Landingpage.php">Home</a></li>
             <li><a href="#">Courses</a></li>
             <li><a href="#">Books</a></li>
             <li><a href="#">About us</a></li>
-            
-          </ul>
-          <div class="buttons">
+        </ul>
+        <div class="buttons">
             <a href="Loginpage.php" class="signin">Log In</a>
             <a href="RegistrationPage.php" class="signup">Create Account</a>
-          </div>
-        </nav>
-      </header>
-<Section class="Main-section">
-    <div class="content">
-    <h1>LOG IN</h1>
-        <form action="Loginpage.php" method="post">
-          <div class="field">
-            <i class='bx bx-user'></i>
-            <input type="text" name="email" id="email" required placeholder="Email or Phone">
-          </div>
-          <div class="field space">
-            <i class='bx bx-lock-alt'></i>
-            <input type="password" name="password" id="password" class="pass-key" required placeholder="Password">
-            <i class="show">SHOW</i>
-          </div>
-          <div class="pass">
-            <a href="#">Forgot Password?</a>
-          </div>
-          
-    <?php
-    if ($message) {
-       
-        echo "<div id='login-fail-message' class='message'>Email and password don't match</div>";
-        echo "<script>
-                // JavaScript to handle login failure message disappearance
-                $(document).ready(function () {
-                    // Hide the login failure message after 5 seconds
-                    setTimeout(function () {
-                        $('#login-fail-message').fadeOut();
-                    }, 3000);
-                });
-            </script>";
-    }
-
-    if (isset($successMessage)) {
-        echo "<div id='login-success-message' class='message'>$successMessage</div>";
-        echo "<script>
-                // JavaScript to handle delayed redirection and message disappearance
-                $(document).ready(function () {
-                    // Delayed redirection after 2 seconds
-                    setTimeout(function () {
-                        window.location.href = 'Dashboard.php';
-                    }, 2000);
-
-                    // Hide the login success message after 2 seconds
-                    setTimeout(function () {
-                        $('#login-success-message').fadeOut();
-                    }, 2000);
-                });
-            </script>";
-    }
-    ?>
-          
-          <div class="field">
-            <input type="submit" value="Continue">
-          </div>
-        </form>
-
-       
-        <div class="signup"><br>
-          Don't have account?
-          <a href="RegistrationPage.php">Signup Now</a>
         </div>
-      </div>
-    
-      
-      
-     
-         
+    </nav>
+</header>
+<section class="Main-section">
+    <div class="content">
+        <h1>LOG IN</h1>
+        <form action="Loginpage.php" method="post">
+            <div class="field <?php if ($invalidEmail) echo 'error'; ?>">
+                <i class='bx bx-user'></i>
+                <input type="text" name="email" id="email" required placeholder="Email or Phone">
+                <?php if ($invalidEmail) echo '<span class="error-message">Email not found</span>'; ?>
+            </div>
+            <div class="field space <?php if ($invalidPassword) echo 'error'; ?>">
+                <i class='bx bx-lock-alt'></i>
+                <input type="password" name="password" id="password" class="pass-key" required placeholder="Password">
+                <?php if ($invalidPassword) echo '<span class="error-message">Incorrect password</span>'; ?>
+                <i class="show">SHOW</i>
+            </div>
+            <div class="pass">
+                <a href="forgetpassword.php">Forgot Password?</a>
+            </div>
+            <div class="field">
+                <input type="submit" value="Continue">
+            </div>
+        </form>
+        <div class="signup"><br>
+            Don't have account?
+            <a href="RegistrationPage.php">Signup Now</a>
+        </div>
+    </div>
+</section>
 
-     
-     
-    </Section>
-    
-
-
-    
-    
+<script>
+    // JavaScript to remove error message when the field is focused
+    document.addEventListener("DOMContentLoaded", function() {
+        const fields = document.querySelectorAll('.field.error input');
+        fields.forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentNode.querySelector('.error-message').style.display = 'none';
+            });
+        });
+    });
+</script>
 </body>
 </html>

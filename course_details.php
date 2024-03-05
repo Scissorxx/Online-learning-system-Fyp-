@@ -16,7 +16,7 @@ $courseId = isset($_GET['course_id']) ? $_GET['course_id'] : null;
 if ($courseId === null) {
     // Redirect to an error page or back to the dashboard if no course ID is provided
     header("Location: dashboard.php");
-    exit();
+        exit();
 }
 
 // Retrieve course details from the database
@@ -41,7 +41,7 @@ $con->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $course['title']; ?> Details</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your styles here -->
+    <link rel="stylesheet" href="course_details.css"> 
 </head>
 <body>
     <div class="container">

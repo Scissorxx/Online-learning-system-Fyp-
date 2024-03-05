@@ -1,5 +1,5 @@
 <?php
-$showAlert = false;
+$errorMessage = $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include 'php/dbconnect.php';
@@ -10,6 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $number = mysqli_real_escape_string($con, $_POST["number"]);
     $password = mysqli_real_escape_string($con, $_POST["password"]);
     $confirmpassword = mysqli_real_escape_string($con, $_POST["confirmpassword"]);
+    
+    
+    
+
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $activation_token = bin2hex(random_bytes(16));
+    $activation_token_hash = hash("sha256", $activation_token);
 
     // Check for duplicate username
     $checkUsernameQuery = "SELECT * FROM `userdetail` WHERE `username`='$username'";
@@ -25,29 +34,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "Username already exists. Please choose a different username.";
     } elseif ($numEmailRows > 0) {
         $errorMessage = "Email already registered. Please use a different email.";
-    } elseif ($password == $confirmpassword) {
-        $sql = "INSERT INTO `userdetail` (`fullname`, `username`, `number`, `email`, `password`, `dt`) VALUES ('$fullrname', '$username', '$number', '$email', '$password', current_timestamp())";
+    } elseif ($password != $confirmpassword) {
+        $errorMessage = "Passwords do not match.";
+    } else {
+        $sql = "INSERT INTO `userdetail` (`fullname`, `username`, `number`, `email`, `password`, `dt`,`user_type`,`account_activation_hash`) VALUES ('$fullrname', '$username', '$number', '$email', '$hashed_password', current_timestamp(),'Student','$activation_token_hash')";
         $result = mysqli_query($con, $sql);
 
         if ($result) {
-            $successMessage = "Registration successful! Redirecting...";
+
+          $mail = require __DIR__ . "/mailer.php";
+
+          $mail->setFrom("noreply@example.com");
+          $mail->addAddress($_POST["email"]);
+          $mail->Subject = "Account Activation";
+          $mail->Body = <<<END
+      
+          Click <a href="http://localhost/myproject/activate-account.php?token=$activation_token">here</a> 
+          to activate your account.
+      
+          END;
+      
+          try {
+      
+              $mail->send();
+      
+          } catch (Exception $e) {
+      
+              echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+              exit;
+      
+          }
+            $successMessage = "Registration Sucessfull <br> please check your mail to activate your account";
+        } else {
+            $errorMessage = "Error: " . mysqli_error($con);
         }
-    } else {
-        $errorMessage = "Passwords do not match.";
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="Registratio.css">
+    <link rel="stylesheet" href="RegistrationsPages.css">
     <script src="https://use.fontawesome.com/80976cfcfc.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    
 
     <title>RegistrationPage</title>
 </head>
@@ -70,25 +104,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
           <div class="buttons">
             <a href="Loginpage.php" class="signin">Log In</a>
-            <a href="RegistrationPage.php" class="signup">Create Account</a>
+            <a href="RegistrationPages.php" class="signup">Create Account</a>
           </div>
         </nav>
       </header>
 
-      <Section class="Main-section">
+      <section class="Main-section">
         <div class="container">
             <div class="title">Registration</div>
             <div class="content">
+
+            <br>
+              
+              <?php if(isset($successMessage)): ?>
+                <div class="success-message"><?php echo $successMessage; ?></div>
+              <?php endif; ?>
               <form action="RegistrationPage.php" method="post">
                 <div class="user-details">
                     
                   <div class="input-box">
-                  <!-- <i class='bx bx-user'></i> -->
-                    <span class="details">  Full Name</span>
-                    
-                    
+                    <span class="details">Full Name</span>
                     <input type="text" name="fullname" id="fullname" placeholder="Enter your name" required>
                   </div>
+                  
                   <div class="input-box">
                     <span class="details">Username</span>
                     <input type="text" name="username" id="username" placeholder="Enter your username" required>
@@ -101,50 +139,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="details">Phone Number</span>
                     <input type="text" name="number" id="number" placeholder="Enter your number" required>
                   </div>
-                  <div class="input-box">
-                    <span class="details">Password</span>
-                    <input type="password" name="password" id="password" placeholder="Enter your password" required>
-                  </div>
-                  <div class="input-box">
-                    <span class="details">Confirm Password</span>
-                    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm your password" required>
-                  </div>
+  
+
+<div class="input-box">
+  <span class="details">Password</span>
+  <input type="password" name="password" id="password" placeholder="Enter your password" required oninput="toggleShowButtonVisibility(this)">
+  <button class="show-password-btn" type="button" onclick="togglePasswordVisibility('password')">Show</button>
+</div>
+
+<div class="input-box">
+  <span class="details">Confirm Password</span>
+  <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm your password" required oninput="toggleShowButtonVisibility(this)">
+  <button class="show-password-btn" type="button" onclick="togglePasswordVisibility('confirmpassword')">Show</button>
+</div>
+                  
                 </div>
-                <?php
-
-if (isset($errorMessage)) {
-  echo "<div id='error-message' class='message'>$errorMessage</div>";
-}
-
-    if (isset($successMessage)) {
-        echo "<div id='login-success-message' class='message'>$successMessage</div>";
-        echo "<script>
-                // JavaScript to handle delayed redirection and message disappearance
-                $(document).ready(function () {
-                    // Delayed redirection after 2 seconds
-                    setTimeout(function () {
-                        window.location.href = 'Loginpage.php';
-                    }, 2000);
-
-                    // Hide the login success message after 2 seconds
-                    setTimeout(function () {
-                        $('#login-success-message').fadeOut();
-                    }, 2000);
-                });
-            </script>";
-    }
-    ?>
+                <?php if(isset($errorMessage)): ?>
+                <div class="error-message"><?php echo $errorMessage; ?></div>
+              <?php endif; ?>
+              <b></b>
+                <div class="input-box">
+                    <input type="checkbox" name="terms" id="terms" required>
+                    <label for="terms">I agree to the <a href="terms_and_conditions.php" target="_blank">terms and conditions</a></label>
+                  </div>
+                 
                 <div class="button">
                   <input type="submit" name="submit" id="submit" value="Register">
                 </div>
+                
               </form>
+              
             </div>
-            
-
           </div>
+      </section>
 
-          
+      <script>
+  function toggleShowButtonVisibility(inputElement) {
+    var showButton = inputElement.nextElementSibling;
+    if (inputElement.value.trim() !== "") {
+      showButton.style.display = "block";
+    } else {
+      showButton.style.display = "none";
+    }
+  }
 
-      </Section>
+  function togglePasswordVisibility(inputId) {
+    var input = document.getElementById(inputId);
+    if (input.type === "password") {
+      input.type = "text";
+      document.querySelector(`button[onclick="togglePasswordVisibility('${inputId}')"]`).textContent = "Hide";
+    } else {
+      input.type = "password";
+      document.querySelector(`button[onclick="togglePasswordVisibility('${inputId}')"]`).textContent = "Show";
+    }
+  }
+</script>
 </body>
 </html>

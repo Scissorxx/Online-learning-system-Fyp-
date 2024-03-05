@@ -1,15 +1,15 @@
 <?php 
-$_SERVER = "localhost";
+$server = "localhost";
 $username = "root";
 $password = "";
 $database = "my_system";
 
-$con = mysqli_connect($_SERVER,$username,$password,$database);
+$con = mysqli_connect($server, $username, $password, $database);
 
-if ($con){
-    
-}else{
-    die("error". mysqli_connect_error());
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
+// Return the connection object
+return $con;
 ?>

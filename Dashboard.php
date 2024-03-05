@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Online learning Landing page 
     </title>
-    <link rel="stylesheet" href="Dashb.css" />
+    <link rel="stylesheet" href="Dash_boardd.css" />
     
   </head>
   <body>
@@ -37,41 +37,48 @@
           </svg>
         </label>
         <ul class="links">
-          <li><a href="Dashboard.php">Home</a></li>
+          <li><a href="Landingpage.php">Home</a></li>
           <li><a href="#">Courses</a></li>
           <li><a href="#">Books</a></li>
           <li><a href="#">About us</a></li>
           
         </ul>
-        <div id="navbar">
-  <div class="buttons">
-    <div id="user-logo" onclick="toggleProfileDetails()">
-      <img src="Image/Profile.png" alt="User Logo">
-    </div>
+        <div class="buttons">
+  <div id="user-logo" onclick="toggleProfileDetails()">
+    <img src="Image/Profile.png" alt="User Logo">
+   
   </div>
 </div>
-
+      
   
       
       </nav>
     </header>
-    
-    <div id="profile-details" style="display: none;">
 
-    <!-- <img id="profile-image" src=" -->
-    <?php 
-    // echo $userdetail['profile_image'] ? $userdetail['profile_image'] : 'default-profile.png'; 
-    ?>
-    <!-- " alt="User Profile"> -->
+    <div id="profile-details">
+      <h3>User Details</h3>
+      <?php if ($userdetail['Image'] !== null): ?>
+        <img src="<?php echo $userdetail['Image']; ?>" alt="Profile Picture" style="width: 100px; height: 100px;">
+
+  <?php else: ?>
+    <img src="Image/default.jpg" alt="User Logo" style="width: 100px; height: 100px;">
+    <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
+  <input type="file" name="profile_picture" id="profile_picture" style="display: none;" onchange="this.form.submit()">
+  <button type="button" onclick="document.getElementById('profile_picture').click()">upload</button>
+</form>
 
 
-  <p>Name: <?php echo $userdetail['username']; ?></p>
-  <p>Email: <?php echo $userdetail['email']; ?></p>
-  <p>Number: <?php echo $userdetail['number']; ?></p>
-  <!-- Add more user details as needed -->
- 
-  <button id="logout-button" onclick="logout()">Logout</button>
-</div>
+  <?php endif; ?>
+
+
+  
+
+      <p>Name: <?php echo $userdetail['username']; ?></p>
+      <p>Email: <?php echo $userdetail['email']; ?></p>
+      <p>Number: <?php echo $userdetail['number']; ?></p>
+      <a href="edit_profile.php" class="edit-profile-button">Edit Profile</a>
+      <button id="logout-button" onclick="logout()">Logout</button>
+    </div>
 
 
     <section class="Mainsecton">
@@ -83,44 +90,12 @@
         
        <br>
        
-        <a href="#" class="btn">Learn More</a><br>
+        <a href="#" class="btn"> Explore   Courses</a><br>
 
       </div>
     
     
     </section>
-
-    <section class="ExploreCourses">
-    <h2>Explore Courses</h2>
-  
-    <div class="contents">
-        <!-- Explore Courses content goes here -->
-       
-
-        <?php
-        // Dynamically fetch and display courses from the database
-        $coursesQuery = "SELECT * FROM courses";
-        $coursesResult = mysqli_query($con, $coursesQuery);
-
-        if ($coursesResult->num_rows > 0) {
-            while ($course = mysqli_fetch_assoc($coursesResult)) {
-        ?>
-                <div class="course">
-                    <img src="<?php echo $course['image']; ?>" alt="<?php echo $course['title']; ?>">
-                    <h4><?php echo $course['title']; ?></h4>
-                    <p>Level: <?php echo $course['level']; ?></p>
-                    <p>Instructor: <?php echo $course['instructor']; ?></p>
-                    <a href="course_details.php?course_id=<?php echo $course['id']; ?>">Enroll Now</a>
-                </div>
-        <?php
-            }
-        } else {
-            echo "<p>No available courses found.</p>";
-        }
-        ?>
-    </div>
-</section>
-
 
 
     
@@ -138,16 +113,43 @@
  
     
 
-    <script>
-   function toggleProfileDetails() {
+
+    
+
+<script>
+    
+
+
+function toggleProfileDetails() {
+    
     var profileDetails = document.getElementById("profile-details");
-    if (profileDetails.style.display === "none") {
-      profileDetails.style.display = "block";
-    } else {
-      profileDetails.style.display = "none";
-    }
+    profileDetails.style.display = (profileDetails.style.display === "block") ? "none" : "block";
+}
+</script>
+
+
+<script>
+  function changeProfilePhoto() {
+      var input = document.getElementById('profile-photo-input');
+      input.click();
   }
 
+  function previewImage() {
+      var input = document.getElementById('profile-photo-input');
+      var image = document.getElementById('profile-image');
+
+      var file = input.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+          image.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+  }
+</script>
+
+<script>
   function logout() {
     // You can perform any additional cleanup or server-side logout logic here
 
@@ -155,14 +157,6 @@
     window.location.href = 'Loginpage.php'; // Change 'logout.php' to your actual logout script/page
   }
 </script>
-    
 
-
-
-
-
-
-
-
-  </body>
+</body>
 </html>

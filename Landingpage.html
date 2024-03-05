@@ -1,70 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online learning Landing page 
-    </title>
-    <link rel="stylesheet" href="LandingpageStyle.css" />
-  </head>
-  <body>
-    <header class="header">
-      <nav class="navbar">
-        <h2 class="logo"><a href="#">Online Learning</a></h2>
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" id="hamburger-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </label>
-        <ul class="links">
-          <li><a href="Landingpage.html">Home</a></li>
-          <li><a href="#">Courses</a></li>
-          <li><a href="#">Books</a></li>
-          <li><a href="#">About us</a></li>
-          
-        </ul>
-        <div class="buttons">
-          <a href="Loginpage.html" class="signin">Log In</a>
-          <a href="#" class="signup">Create Account</a>
-        </div>
-      </nav>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="Landingpage.css">
+   <link rel="stylesheet" href="navbar.css">
 
-    <section class="Mainsecton">
-      <div class="content">
+    <title>Landing page </title>
+</head>
+<body>
 
-        <h1>Your Journey to Excellence Begins Here</h1>
-         <h2>Dive into Learning</h2> <br> <br>
-        <p>Discover a world of knowledge and expertise as you embark on your learning <br>journey with us. Our platform offers you the opportunity to learn from the best in <br> the field, with top-tier instructors who are passionate about sharing their skills <br>and insights</p> <br>
-        
-       <br>
-       
-        <a href="#" class="btn"> Explore   Courses</a><br>
-
-      </div>
-    
-    
-    </section>
-
-
-    <Section class="Courses">
-<h1>Popular Courses</h1>
-
-    </Section>
-    
-
-
-  
-    
-      
-
-
- 
-    
-
+    <video autoplay loop muted plays-inline class="backvideo">
+        <source src="Image/learning.mp4">
+    </video>
 
    
+    <header class="header">
+        <nav class="navbar">
+            <h2 class="logo"><a href="#">Online Learning</a></h2>
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" id="hamburger-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </label>
+            <ul class="links">
+                <li><a href="Landingpage.php">Home</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">About us</a></li>
+            </ul>
+            <div class="buttons">
+                <a href="Loginpage.php" class="signin">Log In</a>
+                <a href="RegistrationPage.php" class="signup">Create Account</a>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="Mainsecton">
+        <div class="content">
 
-  </body>
+           
+  
+          <h1>Your Journey to Excellence Begins Here</h1>
+           <h2>Dive into Learning</h2> <br> 
+          <p>Discover a world of knowledge and expertise as you embark on your learning <br>journey with us. Our platform offers you the opportunity to learn from the best in <br> the field, with top-tier instructors who are passionate about sharing their skills <br>and insights</p> <br>
+          
+         
+          <a href="" class="btn">Explore courses</a>
+  
+        </div>
+      
+      
+      </section>
+
+      <section class="services" id="services">
+        
+        <ul class="cards">
+          <li class="card">
+          <img src="Image/BestTeacher.jpg" alt="img">
+
+            <h3>Best Teacher</h3>
+            <p>Learn from the most knowledgeable and <br>experienced instructors.</p>
+          </li>
+          <li class="card">
+          <img src="Image/bestcourse.jpg" alt="img">
+
+            <h3>Best Course</h3>
+            <p>Explore our extensive library of high-quality <br>courses covering various topics.</p>
+          </li>
+         
+          <li class="card">
+          <img src="Image/liveclasses.jpg" alt="img">
+
+            <h3>Virtual Live Classes</h3>
+            <p>Participate in interactive sessions with live<br> instructors from anywhere.</p>
+          </li>
+        </ul>
+      </section>
+      
+
+      
+      
+      
+     
+
+
+    
+    
+</body>
 </html>
