@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update profile picture if uploaded
     if(isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
         $profilePicture = $_FILES['profile_picture'];
-        $targetDirectory = 'upload_profile/';
+        $targetDirectory = '../upload_profile/';
         $targetFile = $targetDirectory . basename($profilePicture['name']);
 
         // Check file type

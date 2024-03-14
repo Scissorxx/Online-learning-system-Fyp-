@@ -36,15 +36,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $teacher_id = $_POST['teacher'];
 
     // Handling the image upload
-    $target_dir = "../Course_image/";
-    $target_file = $target_dir . basename($_FILES["course-image"]["name"]);
+    
+    // Handling the image upload
+$target_dir = "../Course_image/";
+$target_file = $target_dir . basename($_FILES["course-image"]["name"]);
+
+// Check if there's an existing image for the course
+if (!empty($course['Course_Image']) && file_exists($course['Course_Image'])) {
+    // Delete the old image
+    unlink($course['Course_Image']);
+}
     move_uploaded_file($_FILES["course-image"]["tmp_name"], $target_file);
 
     // Update the course details in the database
     $sql = "UPDATE courses SET Course_Name='$course_name', Course_Duration='$course_duration', Course_Difficulty='$course_difficulty', Course_Description='$course_description', Price='$course_price_type', Cost='$course_price', LiveClass='$course_live_classes', Course_Image='$target_file', Teacher='$teacher_id' WHERE Course_ID='$course_id'";
 
     if (mysqli_query($con, $sql)) {
-        echo "Course details updated successfully";
+        echo "<script>alert('Updated successfully!!');</script>";
+          echo "<script>window.location = 'admin_Courses.php';</script>";
     } else {
         echo "Error updating course details: " . mysqli_error($con);
     }
@@ -57,6 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Course</title>
     <link rel="stylesheet" href="../Admin-Css/admin_Courses.css">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../Admin-Css/admin.css">
     <link rel="stylesheet" href="../Admin-Css/edit_Couses.css">
 </head>
 <body>
@@ -73,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="admin_Courses.php" class="active">
               <i class="bx bx-box"></i>
               <span class="links_name">Courses</span>
             </a>
@@ -155,14 +166,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea id="course-description" name="course-description" required><?php echo $course['Course_Description']; ?></textarea>
             </div>
             <div class="form-group">
-                <label for="teacher">Select Teacher:</label>
-                <select id="teacher" name="teacher" required>
-                    <option value="">Select Teacher</option>
-                    <?php foreach($teachers as $teacher): ?>
-                        <option value="<?php echo $teacher['fullname']; ?>" <?php if($teacher['fullname'] == $course['Teacher']) echo 'selected'; ?>><?php echo $teacher['fullname']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+    <label for="teacher">Teacher:</label>
+    <?php if (!empty($course['Teacher'])): ?>
+        <p>The currently appointed teacher is: <?php echo $course['Teacher']; ?></p>
+        <p>If you want to appoint another teacher, select from the options below:</p>
+    <?php endif; ?>
+    <select id="teacher" name="teacher">
+        <?php if (empty($course['Teacher'])): ?>
+            <option value="">Select Teacher</option>
+        <?php endif; ?>
+        <?php foreach($teachers as $teacher): ?>
+            <option value="<?php echo $teacher['fullname']; ?>"><?php echo $teacher['fullname']; ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
             <div class="form-group">
     <label for="course-image">Course Image:</label>
     <input type="file" id="course-image" name="course-image" accept="image/*">

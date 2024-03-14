@@ -19,7 +19,8 @@
         $sql = "INSERT INTO courses (Course_Name, Course_Duration, Course_Difficulty, Course_Description, Price, Cost,LiveClass, Course_Image) VALUES ('$course_name', '$course_duration', '$course_difficulty', '$course_description','$course_price_type', '$course_price', '$course_live_classes', '$target_file')";
         
         if (mysqli_query($con, $sql)) {
-            echo "New record created successfully";
+          echo "<script>alert('New Course added successfully!!');</script>";
+          echo "<script>window.location = 'admin_Courses.php';</script>";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($con);
         }
@@ -36,7 +37,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Course</title>
-    <link rel="stylesheet" href="../Admin-Css/admin_Courses.css">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../Admin-Css/admin.css">
     <link rel="stylesheet" href="../Admin-Css/add_course.css">
 
     
@@ -54,7 +56,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="admin_Courses.php" class="active">
               <i class="bx bx-box"></i>
               <span class="links_name">Courses</span>
             </a>
@@ -134,7 +136,7 @@
             </div>
             <div class="form-group">
                 <label for="course-image">Course Image:</label>
-                <input type="file" id="course-image" name="course-image" accept="image/*" required>
+                <input type="file" id="course-image" name="course-image" accept="image/*" >
             </div>
             <div class="form-group">
                 <label for="course-price">Price:</label>

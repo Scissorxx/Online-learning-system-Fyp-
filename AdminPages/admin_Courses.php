@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../Admin-Css/admin_Courses.css" />
+    <link rel="stylesheet" href="../Admin-Css/admin.css">
+
     <title>Admin Dashboard</title>
 </head>
 <body>
@@ -20,13 +22,13 @@
             </a>
           </li>
           <li>
-            <a href="#" class="active">
+            <a href="admin_Courses.php" class="active">
               <i class="bx bx-box"></i>
               <span class="links_name">Courses</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="admin_lesson.php">
               <i class="bx bx-list-ul"></i>
               <span class="links_name">Lessons</span>
             </a>
@@ -106,14 +108,17 @@
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>Teacher</th>
+                                <th>Image</th>
                                 <th>Actions</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             include '../php/dbconnect.php';
 
-                            $sql = "SELECT Course_ID, Course_Name, Price, Status, Teacher FROM courses";
+
+                            $sql = "SELECT Course_ID, Course_Name, Price, Status, Teacher, Course_Image FROM courses";
                             $result = mysqli_query($con, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -124,8 +129,14 @@
                                     echo "<td>" . $row['Price'] . "</td>";
                                     echo "<td>" . $row['Status'] . "</td>";
                                     echo "<td>" . $row['Teacher'] . "</td>";
-
-
+                                    echo "<td>";
+                                    if ($row['Course_Image'] !== null) {
+                                        echo "<img src='" . htmlspecialchars($row['Course_Image']) . "' alt='Course Image' style='max-width: 100px; max-height: 100px;'>";
+                                    } else {
+                                        echo "No Image Available";
+                                    }
+                                    echo "</td>";
+                                    
 
                                     echo "<td><a href='edit_Courses.php.?id=" . $row['Course_ID'] . "' class='edit-btn'>Edit</a> <button onclick='confirmDelete(\"" . $row['Course_Name'] . "\", \"" . $row['Course_ID'] . "\")' class='delete-btn'>Delete</button></td>";
                                     

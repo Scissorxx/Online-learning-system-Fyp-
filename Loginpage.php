@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 header("Location: teacher_dashboard.php");
                                 break;
                             case 'Student':
-                                header("Location: Dashboard.php");
+                                header("Location: User/Dashboard.php");
                                 break;
                         }
                         exit(); // Terminate the script after redirection
