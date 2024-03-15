@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    
+  }
+  
+  
+  
+  
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+  }
+  
+  
+  header{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    
+    background-color: #000000;
+  
+  
+  }
+  
+  
+  
+  .header {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    z-index: 10;
+  
+    
+   
+    
+    
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+    max-width: 90%; /* Set maximum width to 100% */
+    margin: 0; /* Remove any default margin */
+  }
+  
+  
+  .navbar .logo a {
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .navbar .links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 35px;
+    }
+    .navbar .links a {
+      font-weight: 500;
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 0;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    
+    .navbar .links a:hover {
+      color: #05ff2f;
+    }
+    
+    .navbar .links a::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+    }
+    
+    .navbar .links a:hover::before {
+      background-color: #05ff2f;
+    }
+    
+    .navbar .buttons a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      padding: 15px 0;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    
+    .navbar .buttons a:not(:last-child) {
+      margin-right: 30px;
+    }
+    
+    .navbar .buttons .signin:hover,
+    .navbar .buttons .signup:hover {
+      color: #05ff2f;
+      transform: scale(1.05);
+    }
+    
+    .navbar .buttons .signup {
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: background-color 0.2s ease, color 0.2s ease, padding 0.2s ease, transform 0.2s ease;
+      background-color: #20b486;
+      color: #f1ecec;
+    }
+    
+    .navbar .buttons .signup:hover {
+      background-color: #066d17;
+      color: #fff;
+      padding: 12px 22px;
+    }
+    
+  
+  #menu-toggle {
+    display: none;
+  }
+  
+  #hamburger-btn {
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    order: 1;
+  }
+  
+  .buttons {
+      display: flex;
+      gap: 10px;
+    }
+  
+    .buttons a i {
+      font-size: 1.5rem; /* Adjust the font size as needed */
+      margin-right: 5px; /* Adjust the spacing between icons and text */
+      color: #fff; /* Set the color of the icons */
+    }
+    
+    .buttons a:hover i {
+      color: #05ff2f; /* Change the color on hover if desired */
+    }
+  
+    #user-logo {
+      cursor: pointer;
+  }
+  
+  #user-logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+  }
+  
