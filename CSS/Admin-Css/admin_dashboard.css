@@ -1,0 +1,40 @@
+
+
+.dashboard-content {
+  padding: 20px;
+}
+
+.dashboard-content h2 {
+  margin-bottom: 20px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    width: calc(50% - 20px);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-box:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stat-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .stat-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  

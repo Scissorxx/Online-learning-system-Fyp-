@@ -1,0 +1,77 @@
+/* style.css */
+
+/* Style for lessons */
+.content{
+    margin-left: 250px;
+   
+}
+.lessons {
+    padding: 20px;
+}
+
+.lesson-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.lesson-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+.lesson-list li h3 {
+    margin-top: 0;
+}
+
+.lesson-list li p {
+    margin-bottom: 10px;
+}
+
+.lesson-list li a {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.lesson-list li a:hover {
+    background-color: #45a049;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9; /* Background color for the filters section */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 8px; /* Add some border radius for a nicer look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  }
+  
+  .filters h2 {
+    margin: 0;
+    color: #333; /* Color for the heading text */
+  }
+  
+  .add-btn {
+    padding: 10px 20px;
+    background-color: #4caf50; /* Background color for the add button */
+    color: #fff; /* Text color for the add button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-btn i {
+    margin-right: 5px; /* Add some space between the icon and the text */
+  }
+  
+  .add-btn:hover {
+    background-color: #29652b; /* Hover background color for the add button */
+  }

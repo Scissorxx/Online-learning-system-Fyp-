@@ -1,0 +1,117 @@
+.courses {
+  margin-left: 250px;
+  margin-top: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #007bff; /* Added border */
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.table-container table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+.edit-btn,
+.delete-btn {
+  display: inline-block;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn i,
+.delete-btn i {
+  font-size: 20px; /* Adjust icon size as needed */
+}
+
+.edit-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+
+
+.view-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-btn i {
+  margin-right: 5px;
+}
+
+.view-btn:hover {
+  background-color: #29652b;
+}
+
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9; /* Background color for the filters section */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border-radius: 8px; /* Add some border radius for a nicer look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.filters h2 {
+  margin: 0;
+  color: #333; /* Color for the heading text */
+}
+
+.add-btn {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Background color for the add button */
+  color: #fff; /* Text color for the add button */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn i {
+  margin-right: 5px; /* Add some space between the icon and the text */
+}
+
+.add-btn:hover {
+  background-color: #29652b; /* Hover background color for the add button */
+}

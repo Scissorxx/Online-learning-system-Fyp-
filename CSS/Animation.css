@@ -1,0 +1,134 @@
+@keyframes slideInDown {
+    from {
+      transform: translateY(-100%);
+      visibility: visible;
+    }
+  
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .slideInDown {
+    animation: slideInDown 1s ease;
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(100%);
+      visibility: visible;
+    }
+  
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .slideInUp {
+    animation: slideInUp 1s ease;
+  }
+
+  @keyframes slideInSide {
+    from {
+      transform: translateX(-100%);
+      visibility: visible;
+    }
+  
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  .slideInSide {
+    animation: slideInSide 1s ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotateIn {
+    from {
+      transform: rotate(-90deg);
+    }
+  
+    to {
+      transform: rotate(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .box {
+    width: 250px;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation-duration: 1s;
+  }
+
+  .box:nth-child(odd) {
+    animation-name: fadeInUp;
+  }
+
+  .box:nth-child(even) {
+    animation-name: slideInRight;
+  }
+
+  .box .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    animation-duration: 1s;
+  }
+
+  .box:nth-child(1) .icon {
+    animation-name: rotateIn;
+  }
+
+  .box:nth-child(3) .icon {
+    animation-name: slideInLeft;
+  }
+
+  .box h3,
+  .box p {
+    margin: 0;
+  }
