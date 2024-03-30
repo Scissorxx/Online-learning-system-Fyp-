@@ -1,0 +1,286 @@
+.page-header {
+    background-image: url('../../Media/Default/background1.png');
+    height: 150px; /* Adjust height as needed */
+    background-position: center;
+    margin-top: 60px;
+    position: relative; /* Add position relative */
+}
+
+
+.container {
+    max-width: 1200px; /* Adjust container width +as needed */
+    margin: 0 auto; /* Center the container */
+    position: absolute; /* Add position absolute */
+    top: 50%; /* Position from top */
+    left: 50%; /* Position from left */
+    transform: translate(-50%, -50%); /* Center the container */
+}
+
+.page-header_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-heading h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 24px; /* Adjust font size as needed */
+    color: #333; /* Heading color */
+}
+
+.coustom-breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 35px; /* Adjust font size as needed */
+    color: #eae4e4;
+
+    
+}
+
+.coustom-breadcrumb li {
+    display: inline;
+    margin-right: 10px; /* Adjust spacing between breadcrumb items */
+    font-size: 35px; /* Adjust font size as needed */
+    color: #eae4e4;
+
+}
+
+.coustom-breadcrumb li:last-child {
+    font-weight: bold; /* Make the last breadcrumb item bold */
+}
+
+.coustom-breadcrumb li a {
+    text-decoration: none;
+    color: #eaeef3; /* Link color */
+}
+
+.coustom-breadcrumb li a:hover {
+    color: #e653ab; /* Underline on hover */
+}
+
+
+.Main-section {
+    padding: 20px;
+  }
+  .containers{
+    flex: 1;
+    margin-top: 30px;
+    margin-left: 90px;
+  }
+  .course-details {
+    display: flex;
+    gap: 50px;
+  }
+  
+  
+  
+  
+  
+  .image-section {
+    flex: 1;
+    margin-right: 20px;
+    border-radius: 3px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+  
+   
+  }
+  
+  .image-section img {
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 930px; /* Adjust as needed */
+    max-width: 100%;
+    max-height: 100%;
+    height: 500px; /* Maintain aspect ratio */
+    border-radius: 10px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+    object-fit: cover; /* Ensures the image covers its entire container */
+    transition: transform 0.3s ease; /* Adds a smooth transition effect */
+  }
+  .image-section p{
+    font-size: 40px;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-weight: 300px;
+
+
+  }
+  
+  .course-info {
+    margin-right: 30px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 300px;
+    height: 700px;
+    border-radius: 3px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+    text-align: center; /* Centers inline elements within .course-info */
+}
+
+
+  .course-info h1{
+    font-size: 50px;
+    margin-top: 40px;
+   
+  }
+ 
+
+  .course-info .enroll-button {
+    margin-top: 40px;
+    
+
+    display: inline-block;
+    padding: 15px 60px;
+    background-color: #e653ab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.enroll-button:hover {
+    background-color: #d440a8;
+}
+
+/* Overall page layout */
+
+  
+  .course-container {
+    margin-top: 210px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .course-information table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .course-information table th, 
+  .course-information table td {
+    padding: 15px;
+    border-bottom: 1px solid #000000;
+    text-align: left;
+  }
+  
+  .course-information table th {
+    font-weight: bold;
+    color: #333;
+    background-color: #ffffff;
+  }
+  
+  .course-information table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .course-description {
+    padding: 20px;
+  }
+  
+  .content {
+    flex: 1;
+    margin-left: 90px;
+  }
+  
+
+  
+  .about-the-course {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #444;
+  }
+  
+  .about-the-course h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: #333;
+  }
+  
+  .about-the-course p {
+    font-size: 18px; /* Decreased font size for better readability */
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: #333;
+  }
+  
+  .about-the-course span {
+    font-weight: bold; /* Emphasize the inserted course topic */
+    color: #007bff; /* Change color for inserted course topic */
+  }
+  
+/* Base styles */
+.lesson {
+  padding: 20px;
+}
+
+/* Lesson Box */
+.lessonbox {
+  flex: 1;
+  margin: 30px 90px 0;
+  background-color: #ffffff; /* White background */
+  border-radius: 25px; /* Rounded corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  overflow: hidden;
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.lessonbox:hover {
+  transform: translateY(-5px); /* Hover effect */
+}
+
+/* Lesson Content */
+.lesson-content {
+  padding: 30px; /* Increased padding */
+}
+
+/* Heading */
+.lesson h2 {
+  font-size: 36px;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Lesson List */
+.lesson-list .lesson-item:hover:before {
+  opacity: 1;
+}
+
+/* List Item */
+.lesson-list li {
+  padding: 20px; /* Padding for each list item */
+  margin-bottom: 20px; /* Spacing between list items */
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease; /* Smooth transition */
+  font-size: 20px; /* Font size */
+  color: #555555; /* Darker text color */
+}
+
+.lesson-list li:hover {
+  transform: translateY(-5px); /* Hover effect */
+}
+
+.lesson-list li:before {
+  content: "▶"; /* Custom bullet symbol */
+  font-weight: bold;
+  margin-right: 10px;
+  color: #007bff; /* Blue color */
+}

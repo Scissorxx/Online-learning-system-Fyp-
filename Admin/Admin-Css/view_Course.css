@@ -1,0 +1,165 @@
+
+.Main-section {
+    padding: 20px;
+  }
+  .containers{
+    flex: 1;
+    margin-top: 30px;
+    margin-left: 90px;
+  }
+  .course-details {
+    display: flex;
+    gap: 50px;
+  }
+  
+  
+  
+  
+  
+  .image-section {
+    flex: 1;
+    margin-right: 20px;
+    border-radius: 3px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+  
+   
+  }
+  
+  .image-section img {
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 530px; /* Adjust as needed */
+    max-width: 100%;
+    max-height: 100%;
+    height: 500px; /* Maintain aspect ratio */
+    border-radius: 10px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+    object-fit: cover; /* Ensures the image covers its entire container */
+    transition: transform 0.3s ease; /* Adds a smooth transition effect */
+  }
+  .image-section p{
+    font-size: 40px;
+    margin-left: 30px;
+    margin-top: 20px;
+    font-weight: 300px;
+
+
+  }
+  
+  .course-info {
+    margin-right: 30px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 300px;
+    height: 700px;
+    border-radius: 3px; /* Adds a border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+    text-align: center; /* Centers inline elements within .course-info */
+}
+
+
+  .course-info h1{
+    font-size: 50px;
+    margin-top: 40px;
+   
+  }
+ 
+
+  .course-info .enroll-button {
+    margin-top: 40px;
+    
+
+    display: inline-block;
+    padding: 15px 60px;
+    background-color: #e653ab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.enroll-button:hover {
+    background-color: #d440a8;
+}
+
+/* Overall page layout */
+
+  
+  .course-container {
+    margin-top: 210px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .course-information table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .course-information table th, 
+  .course-information table td {
+    padding: 15px;
+    border-bottom: 1px solid #000000;
+    text-align: left;
+  }
+  
+  .course-information table th {
+    font-weight: bold;
+    color: #333;
+    background-color: #ffffff;
+  }
+  
+  .course-information table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .course-description {
+    padding: 20px;
+  }
+  
+  .content {
+    flex: 1;
+    margin-left: 90px;
+  }
+  
+
+  
+  .about-the-course {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #444;
+  }
+  
+  .about-the-course h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: #333;
+  }
+  
+  .about-the-course p {
+    font-size: 18px; /* Decreased font size for better readability */
+    margin-bottom: 20px;
+    margin-left: 30px;
+    color: #333;
+  }
+  
+  .about-the-course span {
+    font-weight: bold; /* Emphasize the inserted course topic */
+    color: #007bff; /* Change color for inserted course topic */
+  }
+  
