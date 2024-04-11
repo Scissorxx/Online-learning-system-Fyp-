@@ -1,0 +1,104 @@
+/* Main section */
+.Main-section {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+}
+
+.containers {
+  display: flex;
+  justify-content: center;
+}
+
+.course-details {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.image-section img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-section img:hover {
+  transform: scale(1.05);
+}
+
+.course-info {
+  flex: 1;
+  padding: 20px;
+}
+
+.course-info h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.course-price {
+  background-color: #f1c40f;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.course-price .content {
+  display: flex;
+  align-items: center;
+}
+
+.price-details h1 {
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+}
+
+.course-container {
+  margin-top: 20px;
+}
+
+.course-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.course-information table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.course-information th {
+  font-weight: bold;
+  padding: 15px 0;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+.course-information td {
+  padding: 15px 0;
+  text-align: left;
+}
+
+/* Course description */
+.course-description {
+  background-color: #fff;
+  padding: 50px 0;
+}
+
+.about-the-course h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.about-the-course p {
+  color: #666;
+  line-height: 1.6;
+}
