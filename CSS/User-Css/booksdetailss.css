@@ -1,0 +1,173 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif; /* Set a default font-family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Page Header */
+.page-header {
+    background-image: url('../../Media/Default/background1.png');
+    height: 150px;
+    background-position: center;
+    margin-top: 60px;
+    position: relative;
+}
+
+.page-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-heading h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: #eae4e4;
+}
+
+.breadcrumb li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.breadcrumb li:last-child {
+    font-weight: bold;
+}
+
+.breadcrumb li a {
+    text-decoration: none;
+    color: #eaeef3;
+}
+
+.breadcrumb li a:hover {
+    color: #e653ab;
+}
+
+/* Overall book details layout */
+.book-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Styling for the book cover image section */
+.image-section {
+    flex: 0 0 40%;
+    margin-right: 20px;
+}
+
+.image-section img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the book information section */
+.info-section {
+    flex: 1;
+}
+
+.info-section h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.price {
+    font-size: 20px;
+    color: #ff0808e4;
+    margin-bottom: 12px;
+}
+label{
+    font-size: 20px;
+}
+input{
+    font-size: 20px;
+
+}
+.btns {
+    color: #e31212;
+    font-size: 18px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    background-color: #faf8f9;
+
+}
+
+/* Buttons styling */
+.buy-btn,
+.add-to-cart-btn {
+    background-color: #ff00c8;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.buy-btn:hover {
+    background-color: #940581;
+}
+
+/* Styling for the book container */
+.book-container {
+    margin-top: 30px;
+}
+
+.book-container h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+/* Styling for the book information table */
+.book-information {
+    width: 100%;
+}
+
+.book-information th,
+.book-information td {
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.book-information th {
+    text-align: left;
+    font-weight: normal;
+    width: 200px;
+    color: #555;
+}
+
+/* Styling for book description */
+.description {
+    margin-top: 30px;
+    font-size: 15px;
+}
+
+.description h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #333;
+}
