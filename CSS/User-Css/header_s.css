@@ -1,0 +1,452 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+
+:root{
+  --primary-color: #c633bc;
+  --secondary: #dbfffe;
+  --black: #141414;
+  --white: #fff;
+  --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+*{
+  font-family: 'DM Sans', sans-serif;
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  outline: none; border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: all .2s linear;
+}
+
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar{
+  width: 1rem;
+}
+
+html::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: white;
+}
+
+section{
+  padding: 5rem 7%;
+}
+
+.heading{
+  position: relative;
+  color: var(--primary-color);
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.heading::after{
+  content: url('../../Media/Default/separator.svg');
+  display: block;
+  width: 10rem;
+  margin-inline: auto;
+  margin-top: -1rem;
+}
+
+/* header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #141414;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Improved box shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1%;
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+/* Logo styles */
+.header .logo {
+  font-size: 2.5rem;
+  font-weight: bold; /* Use 'bold' instead of 'bolder' for consistent weight */
+  color: white;
+  text-transform: uppercase; /* Uppercase for a more pronounced look */
+  margin-top: 10px;
+
+}
+
+.navbar{
+  margin-top: 15px;
+  
+
+}
+
+
+/* Navbar links styles */
+.header .navbar a {
+  font-size: 1.6rem; /* Slightly reduced font size for better balance */
+  color: white;
+  margin: 0 1.5rem; /* Increased margin for better separation */
+  padding: 1rem 0; /* Adjusted padding for better alignment */
+  text-decoration: none; /* Remove default underline */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.header .navbar a:hover {
+  color: var(--primary-color);
+}
+.navbar-list { padding: 15px 20px; }
+
+
+/* Hover underline effect */
+.header .navbar .hover-underline {
+  position: relative;
+}
+
+.header .navbar .hover-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* Adjusted bottom position for better alignment */
+  width: 100%;
+  height: 2px; /* Increased thickness for better visibility */
+  background-color: var(--primary-color); /* Use background color instead of border */
+  transform: scaleX(0);
+  transform-origin: left; /* Set transform origin to left for smooth animation */
+  transition: transform 0.3s ease;
+}
+
+.header .navbar .hover-underline:hover::after,
+.header .navbar .hover-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+
+.header .icons div{
+  font-size: 2.5rem;
+  margin-left: 1.7rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.buttons{
+
+
+display: flex;
+justify-content: space-between;
+gap: 30px;
+}
+
+.Login{
+  font-size: 20px;
+  margin-top: 18px;
+  color: #dbfffe;
+  /* text-transform: lowercase;  */
+
+}
+a:hover {
+  color: var(--primary-color);
+}
+
+
+
+.button{
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  max-width: max-content;
+  border: .1rem solid black;
+  background: var(--primary-color);
+  padding: 1rem 5rem;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: .5rem;
+
+}
+.button::before{
+  content: "";
+  position: absolute;
+  bottom: 100%; left: 50%;
+  transform: translateX(-50%);
+  width: 200%; height: 200%;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  transition: 500ms ease;
+  z-index: -1;
+}
+
+.signup{transition: 250ms ease;}
+.signup-2{
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  min-width: max-content;
+  color: rgb(0, 0, 0);
+  
+
+}
+.button:is(:hover, :focus-visible)::before{
+  bottom: -50%;
+}
+.button:is(:hover, :focus-visible) .signup{
+  transform: translateY(-4rem);
+}
+.button:is(:hover, :focus-visible) .signup-2{
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.arrow{
+  position: absolute;
+  top: 100%; left: 80%;
+  transform: translateX(-50%);
+  min-width: max-content;
+  color: #fbfbfb;
+}
+.button:is(:hover, :focus-visible) .arrow{
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Profile Dropdown */
+/* Profile Dropdown */
+.profile-dropdown {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.profile-dropdown-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  /* background-color: #555; */
+  width: 160px; /* Increased width for better visibility */
+  height: 50px; /* Increased height for better touch interaction */
+  color: #fff; /* White text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.profile-dropdown-btn:hover {
+  background-color: #222322; /* Darker green on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-img img {
+  width: 5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+
+}
+
+.profile-img i {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.3rem;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.profile-dropdown-btn span {
+  margin: 0 0.5rem;
+  font-size: 15px;
+}
+
+/* Dropdown List */
+.profile-dropdown-list {
+  position: absolute;
+  top: calc(100% + 10px);
+  width: 240px; /* Increased width for better readability */
+  right: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: max-height 0.5s ease;
+  max-height: 0;
+}
+
+.profile-dropdown-list.active {
+  max-height: 500px;
+}
+
+.profile-dropdown-list hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 0.5rem 0;
+}
+
+.profile-dropdown-list-item {
+  padding: 0.75rem 1rem;
+  transition: background-color 0.3s, padding-left 0.3s;
+}
+
+.profile-dropdown-list-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.profile-dropdown-list-item a i {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f0f0f0;
+  color: var(--black);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-dropdown-list-item:hover {
+  background-color: #f9f9f9;
+}
+
+/* Profile details */
+#profile-details {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#profile-details h3 {
+  color: #333;
+}
+
+#profile-details img {
+  border-radius: 50%;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#profile-details p {
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: #666;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#menu-btn{
+  display: none;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:991px){
+
+  html{
+    font-size: 55%;
+  }
+
+  .header{
+    padding: 2rem 4rem;
+  }
+
+  section{
+    padding: 3rem 2rem;
+  }
+
+}
+
+@media (max-width:768px){
+
+  #menu-btn{
+    display: inline-block;
+  }
+  .profile-dropdown{
+    display: none;
+  }
+  .profile-dropdown-btn{
+    display: none;
+  }
+
+  .button{
+    display: none;
+  }
+  .Login{
+    display: none;
+  }
+
+  .header .navbar{
+    position: absolute;
+    top: 110%; right: -110%;
+    width: 30rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    background: var(--black);
+  }
+
+  .header .navbar.active{
+    right: 2rem;
+    transition: .4s linear;
+  }
+
+  .header .navbar a{
+    font-size: 2rem;
+    margin: 1rem 2.5rem;
+    display: block;
+  }
+
+  .home .content h3{
+    font-size: 3rem;
+  }
+
+  .about .container .about-content{
+    padding-left: 0;
+  }
+
+}
+
+@media (max-width:450px){
+  html{
+    font-size: 50%;
+  }
+}
