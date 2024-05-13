@@ -2,9 +2,9 @@
 $message = false;
 $invalidEmail = false;
 $invalidPassword = false;
+include '../../php/dbconnect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../../php/dbconnect.php';
 
     // Check if email and password are set in the POST data
     if(isset($_POST["email"]) && isset($_POST["password"])) {
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // Redirect based on user type
                         switch ($row['user_type']) {
                             case 'Admin':
-                                header("Location: admin_dashboard.php");
+                                header("Location: ../../admin/adminPages/admin_dashboard.php");
                                 break;
                             case 'Teacher':
                                 header("Location: teacher_dashboard.php");
@@ -69,6 +69,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Handle database query error
             echo "Error: " . mysqli_error($con);
         }
+    }
+}
+
+
+$sql = "SELECT * FROM landingpage";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        $content_id = $row["content_id"];
+        $name = $row["Name"];
+        $heading1 = $row["heading1"];
+        $heading2 = $row["heading2"];
+        $teacher = $row["teacher"];
+        $course = $row["course"];
+        $class = $row["class"];
+        $material = $row["material"];
     }
 }
 ?>
@@ -101,7 +119,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Your browser does not support the video tag.
         </video>
 <header class="header">
-        <a href="#" class="logo"></i> Online learning</a>
+<a href="Dashboard.php" class="logo"><?php echo $name; ?></a>
+
         <nav class="navbar">
             <a href="Dashboard.php" class="hover-underline">home</a>
             <a href="#about" class="hover-underline">About us</a>

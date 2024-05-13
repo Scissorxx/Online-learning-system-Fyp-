@@ -141,7 +141,7 @@ if(isset($_POST['update'])){
                                     <input type="hidden" name="cart_id" value="<?php echo $id; ?>">
                                     <input class="hidden_input" type="hidden" name="book_price" value="<?php echo $price; ?>">
                                     <button style="background: transparent;" name="update">
-    <i class="fas fa-trash-alt" style="font-size: 26px; cursor: pointer;"></i>
+                                    <i class="fas fa-sync-alt" style="font-size: 26px; cursor: pointer;" onclick="location.reload();"></i>
 </button> |
                                     <a style="color: red;" href="cart.php?remove=<?php echo $id; ?>"> Remove</a>
                                 </form>
@@ -160,7 +160,7 @@ if(isset($_POST['update'])){
                 </tr>
             </tbody>
         </table>
-        <a href="checkout.php" class="btns cart-btn1" style="display:<?php echo ($total > 1) ? 'inline-block' : 'none'; ?>"> &nbsp; Proceed to Checkout</a>
+        <a href="checkoutcart.php" class="btns cart-btn1" style="display:<?php echo ($total > 1) ? 'inline-block' : 'none'; ?>"> &nbsp; Proceed to Checkout</a>
     </div>
 
     <script>

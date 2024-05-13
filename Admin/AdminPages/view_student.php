@@ -4,7 +4,7 @@ include '../../php/dbconnect.php';
 // Fetch student details based on the provided student ID
 if(isset($_GET['id']) && !empty($_GET['id'])) {
     $student_id = $_GET['id'];
-    $sql = "SELECT * FROM userdetail WHERE SN = '$student_id' AND user_type = 'student'";
+    $sql = "SELECT * FROM userdetail WHERE SN = '$student_id' AND user_type = 'Student'";
     $result = mysqli_query($con, $sql);
 
     if(mysqli_num_rows($result) > 0) {
@@ -85,7 +85,11 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <div class="containers">
                 <div class="course-details">
                     <div class="image-section">
-                        <img src="<?php echo $student['Image']; ?>" alt="Student Image">
+                        <?php if (!empty($student['Image'])): ?>
+                            <img src="<?php echo $student['Image']; ?>" alt="Student Image">
+                        <?php else: ?>
+                            <img src="../../Media/Default/default.jpg" alt="Profile Image">
+                        <?php endif; ?>
                         <h1><?php echo $student['fullname']; ?></h1>
                     </div>
                     <div class="course-info">

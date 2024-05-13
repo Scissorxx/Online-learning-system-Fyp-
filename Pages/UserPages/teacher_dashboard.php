@@ -15,75 +15,22 @@ if ($loggedIn) {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $userdetail = mysqli_fetch_assoc($result);
+    $user_id = $userdetail['fullname'];
 }
-
-function insertIntoCart($bookName, $bookID, $bookImage, $bookPrice) {
-    global $con, $userdetail;
-    // Escape user inputs for security
-    $bookName = mysqli_real_escape_string($con, $bookName);
-    $bookID = mysqli_real_escape_string($con, $bookID);
-    $bookImage = mysqli_real_escape_string($con, $bookImage);
-    $bookPrice = mysqli_real_escape_string($con, $bookPrice);
-    $userid = $userdetail["SN"];
-    $quantity = 1;
-
-    // Check if the item already exists in the cart
-    $check_sql = "SELECT * FROM cart WHERE user_id = ? AND book_id = ?";
-    $check_stmt = mysqli_prepare($con, $check_sql);
-    mysqli_stmt_bind_param($check_stmt, "is", $userid, $bookID);
-    mysqli_stmt_execute($check_stmt);
-    $check_result = mysqli_stmt_get_result($check_stmt);
-
-    if (mysqli_num_rows($check_result) > 0) {
-        echo "<script>";
-        echo "document.addEventListener('DOMContentLoaded', function() {";
-        echo "    swal('Warning!', 'This item is already in your cart', 'warning');";
-        echo "});";
-        echo "</script>";
-    } else {
-        // Insert data into database
-        $sql = "INSERT INTO cart (user_id, name, book_id, image, price, quantity) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "issssi", $userid, $bookName, $bookID, $bookImage, $bookPrice, $quantity);
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<script>";
-            echo "document.addEventListener('DOMContentLoaded', function() {";
-            echo "    swal('Success!', 'Item added to cart', 'success');";
-            echo "});";
-            echo "</script>";
-        } else {
-            echo "<script>";
-            echo "document.addEventListener('DOMContentLoaded', function() {";
-            echo "    swal('Error!', 'Failed to add item to cart', 'error');";
-            echo "});";
-            echo "</script>";
-        }
-    }
-
-    // Close the statement
-    if (isset($stmt)) {
-        mysqli_stmt_close($stmt);
-    }
-
-}
-
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Insert book into cart
-    insertIntoCart($_POST['book_name'], $_POST['book_id'], $_POST['book_image'], $_POST['book_price']);
-}
-
 
 // Fetch courses from the database
 $courses = [];
-$sql1 = "SELECT * FROM courses";
-$result1 = mysqli_query($con, $sql1);
-while ($row = mysqli_fetch_assoc($result1)) {
-    $courses[] = $row;
+if ($loggedIn) {
+    $sql1 = "SELECT * FROM courses WHERE Teacher=?";
+    $stmt1 = mysqli_prepare($con, $sql1);
+    mysqli_stmt_bind_param($stmt1, "i", $user_id);
+    mysqli_stmt_execute($stmt1);
+    $result1 = mysqli_stmt_get_result($stmt1);
+    while ($row = mysqli_fetch_assoc($result1)) {
+        $courses[] = $row;
+    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +54,7 @@ while ($row = mysqli_fetch_assoc($result1)) {
 <body>
     <!-- header section starts -->
     <header class="header">
-        <a href="Dashboard.php" class="logo">Online learning</a>
+        <a href="teacher_dashboard.php" class="logo">Online learning</a>
         <nav class="navbar">
             <a href="#home" class="hover-underline">home</a>
             <a href="#about" class="hover-underline">About us</a>
@@ -201,11 +148,12 @@ while ($row = mysqli_fetch_assoc($result1)) {
 
 <!-- Courses section -->
 <section class="courses" id="courses">
-    <h1 class="heading">Our famous courses</h1>
+    <br> <br> <br>
+    <h1 class="heading">courses</h1>
     
     <div class="box-container">
         <?php foreach ($courses as $course): ?>
-            <a href="Coursedetails.php?course_id=<?php echo $course['Course_ID']; ?>" class="box">
+            <a href="teacherCoursedetails.php?course_id=<?php echo $course['Course_ID']; ?>" class="box">
                 <div class="image shine">
                     <img src="<?php echo $course['Course_Image']; ?>" alt="<?php echo $course['Course_Name']; ?>">
                     <!-- Static content for course difficulty -->
@@ -248,117 +196,15 @@ while ($row = mysqli_fetch_assoc($result1)) {
     <br>
     <br>
     <br>
-    <a href="Course.php" class="btn">
-                    <span class="text text-1">View more</span>
-                    <span class="text text-2" aria-hidden="true">View more</span>
-                </a>   
+   
 </section>
 
 
-
-<section class="blog" id="blog">
-    <h1 class="heading">Our Books</h1>
-    <div class="box-container">
-        <?php
-
-        // Retrieve data from the database
-        $select_books = mysqli_query($con, "SELECT * FROM `books`") or die('Query failed');
-
-        // Check if there are any books available
-        if (mysqli_num_rows($select_books) > 0) {
-            // Loop through each book entry
-            while ($fetch_book = mysqli_fetch_assoc($select_books)) {
-                ?>
-                <div class="box">
-                    <div class="image shine">
-                        <img src="<?php echo $fetch_book['image']; ?>" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="icons">
-                            <a href="#"><i class="fas fa-user"></i>by <?php echo $fetch_book['Authors']; ?></a>
-                        </div>
-                        <h3><?php echo $fetch_book['Title']; ?></h3>
-                        <h4>Price:  <?php echo $fetch_book['Price'];?>/-</h4>
-                        <?php
-
-if (!$loggedIn): ?>
- <button type="submit" class="btns" id="addToCartButton"><i class="fas fa-shopping-cart"></i> Add to Cart</button>     
-<?php else: ?>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <input class="hidden_input" type="hidden" name="book_name" value="<?php echo htmlspecialchars($fetch_book['Title']); ?>">
-    <input class="hidden_input" type="hidden" name="book_id" value="<?php echo htmlspecialchars($fetch_book['BookID']); ?>">
-    <input class="hidden_input" type="hidden" name="book_image" value="<?php echo htmlspecialchars($fetch_book['image']); ?>">
-    <input class="hidden_input" type="hidden" name="book_price" value="<?php echo htmlspecialchars($fetch_book['Price']); ?>">
-    <button type="submit" class="btns"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-</form>
-
-<?php endif; ?>
-                    
-
-
-
-
-                      
-
-                        <a href="BooksDetails.php?book_id=<?php echo $fetch_book['BookID']; ?>" class="btn">
-    <span class="text text-1">View details</span>
-</a>
-
-
-                    </div>
-                </div>
-                <?php
-            }
-        } else {
-            // Display a message if no books are available
-            echo '<p class="empty">No books added yet!</p>';
-        }
-        ?>
-    </div>
-<br>
-<br><br>
-    <!-- <a href="Books.php" class="btn">
-                    <span class="text text-1">View more</span>
-                    <span class="text text-2" aria-hidden="true">View more</span>
-                </a>  -->
-</section>
-
-
-    <!-- blog section ends -->
 
   
 
 
-    <!-- about section starts -->
 
-    <section class="about" id="about">
-
-        <h1 class="heading">about us</h1>
-
-        <div class="container">
-
-            <figure class="about-image">
-                <!-- <img src="Media/Default/BestTeacher.jpg" alt="" height="500">
-                <img src="Media/Default/BestTeacher.jpg" alt="" class="about-img"> -->
-            </figure>
-
-            <div class="about-content">
-                <h3>18 years of experience</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus aut impedit expedita aliquam 
-                    provident quod excepturi minus. Similique eveniet fugiat doloribus nisi saepe cupiditate iusto itaque totam! Officia, enim qui.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni voluptatum ipsa quod dolores officia at excepturi quas numquam vero dolorem vitae 
-                    veritatis quisquam fugit voluptates doloribus, id pariatur in ipsam?</p>    
-                <a href="#" class="btn">
-                    <span class="text text-1">read more</span>
-                    <span class="text text-2" aria-hidden="true">read more</span>
-                </a>        
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- about section ends -->
 
 
     

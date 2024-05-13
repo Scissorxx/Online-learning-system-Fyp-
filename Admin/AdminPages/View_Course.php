@@ -25,7 +25,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../Admin-Css/view_Course.css" />
+    <link rel="stylesheet" href="../Admin-Css/view-Course.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-jx6WXSa9CFddo/NQs9Mv78v0CjB+l/5XmlymwHt8bndqvNvhIz1KpRIkAWcJcTbfLs1lxXTIt4deNlOeUHX1Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -67,7 +67,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Dashboard</h1>
+                <h1>Courses</h1>
                 <ul class="breadcrumb">
                     <li>
                         <a href="#">Dashboard</a>
@@ -81,11 +81,14 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         </div>
 
         <section class="Main-section">
+        <h1>Course Details</h1>
+
             <div class="containers">
+
                 <div class="course-details">
                     <div class="image-section">
                         <img src="<?php echo $course['Course_Image']; ?>" alt="Course Image">
-                        <p><?php echo $course['Course_Name']; ?></p>
+                        <h1><?php echo $course['Course_Name']; ?></h1>
                     </div>
                     <div class="course-info">
                         <h1><?php echo ($course['Price'] == 'free') ? 'Free' : 'Paid'; ?></h1>
@@ -103,19 +106,19 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
                             <div class="course-information">
                                 <table>
                                     <tr>
-                                        <th><i class="fas fa-clock"></i> Duration</th>
+                                        <th>Duration</th>
                                         <td><?php echo $course['Course_Duration']; ?></td>
                                     </tr>
                                     <tr>
-                                        <th><i class="fas fa-bolt"></i> Difficulty</th>
+                                        <th>Difficulty</th>
                                         <td><?php echo ucfirst($course['Course_Difficulty']); ?></td>
                                     </tr>
                                     <tr>
-                                        <th><i class="fas fa-book"></i> Lessons</th>
+                                        <th> Lessons</th>
                                         <td>12</td> <!-- Replace with actual number of lessons -->
                                     </tr>
                                     <tr>
-                                        <th><i class="fas fa-user"></i> Instructor</th>
+                                        <th>Instructor</th>
                                         <td><?php echo $course['Teacher']; ?></td>
                                     </tr>
                                 </table>

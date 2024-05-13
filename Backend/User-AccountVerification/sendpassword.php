@@ -14,7 +14,7 @@ $sql = "UPDATE userdetail
 
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("ss", $verification_code, $email);
-$stmt->execute();
+$stmt->execute(); 
 
 if ($mysqli->affected_rows) {
     $_SESSION["email"] = $email;
@@ -27,7 +27,7 @@ if ($mysqli->affected_rows) {
     $mail->Subject = "Password Reset";
     $mail->Body = <<<END
 Your verification code for password reset is: $verification_code
-END;
+END ;
 
     try {
         $mail->send();

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // SQL query to insert data into the database
-    $query = "INSERT INTO userdetail (fullname, username, number, email, password, user_type) VALUES ('$fullname', '$username', '$number', '$email', '$hashed_password', 'student')";
+    $query = "INSERT INTO userdetail (fullname, username, number, email, password, user_type) VALUES ('$fullname', '$username', '$number', '$email', '$hashed_password', 'Student')";
 
     // Execute the query
     if (mysqli_query($con, $query)) {
@@ -34,13 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isHTML(true);
             $mail->Subject = 'Account Activation';
             $mail->Body = '
-                <p>Dear ' . $fullname . ',</p>
-                <p>Your account has been created successfully. Here are your login details:</p>
-                <ul>
-                    <li><strong>Email:</strong> ' . $email . '</li>
-                    <li><strong>Password:</strong> ' . $password . '</li>
-                </ul>
-            ';
+            <div style="background-color: #f0f0f0; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">Dear ' . $fullname . ',</p>
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">Your student account has been created successfully.</p>
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">Please find below your login details:</p>
+            
+            <div style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin-top: 10px;">
+                <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;"><strong>Email:</strong> ' . $email . '</p>
+                <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;"><strong>Password:</strong> ' . $password . '</p>
+            </div>
+        
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333; margin-top: 10px;">Please ensure to keep your login credentials confidential.</p>
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">Best regards,<br>The Administration Team</p>
+        </div>';
 
             $mail->send();
             echo 'Message has been sent';

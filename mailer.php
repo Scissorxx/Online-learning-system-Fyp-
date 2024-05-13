@@ -4,6 +4,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 require __DIR__ . "/vendor/autoload.php";
 
 $mail = new PHPMailer(true);
@@ -12,12 +16,14 @@ $mail = new PHPMailer(true);
 
 $mail->isSMTP();
 $mail->SMTPAuth = true;
-
-$mail->Host = "smtp-relay.brevo.com";
+$mail->SMTPSecure ='tls';
+$mail->Host = "smtp.gmail.com";
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
-$mail->Username = "np03cs4s220095@heraldcollege.edu.np";
-$mail->Password = "FIHUqSNn2WyRxO49";
+$mail->Username = "hamroonlinelearning@gmail.com";
+$mail->Password = "ehvb hral yrss ugwj";
 
 $mail->isHtml(true);
 return $mail;
+
+

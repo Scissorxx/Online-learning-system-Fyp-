@@ -21,6 +21,7 @@ if ($loggedIn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 
@@ -284,6 +285,24 @@ $(document).ready(function() {
                                    "&email= <?php echo $email; ?>"+
                                    "&product_name=" + encodeURIComponent(payload.purchase_order_name);
                         xhrs.send(data);
+
+                          
+                        Swal.fire({
+                title: 'Your order has been placed successfully!',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'View',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to cart page
+                    window.location.href = 'cart.php';
+                } else {
+                    // Redirect to inbox page
+                    window.location.href = 'inbox.php';
+                }
+            });
+                     
 
                     },
                     onError(error) {

@@ -16,22 +16,15 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.tiny.cloud/1/ynu5oa33yc3yq0jzt1s9xfpmfic0m7knokyzlvwehwtkkm9c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://cdn.tiny.cloud/1/ynu5oa33yc3yq0jzt1s9xfpmfic0m7knokyzlvwehwtkkm9c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-      tinymce.init({
-        selector: 'textarea',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-          { value: 'First.Name', title: 'First Name' },
-          { value: 'Email', title: 'Email' },
-        ],
-        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-      });
-    </script>
-  
+<script src="https://cdn.tiny.cloud/1/ynu5oa33yc3yq0jzt1s9xfpmfic0m7knokyzlvwehwtkkm9c/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+  });
+</script>
 
     <title>View Lessons</title>
 </head>
@@ -201,7 +194,7 @@ mysqli_close($con);
 
 
         <div id="addEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
+        <div class="modal-dialog" style="max-width: 1000px;">
         <div class="modal-content">
         <div class="modal-header">                        
                     <h4 class="modal-title">Add New Lessons</h4>
@@ -248,6 +241,20 @@ mysqli_close($con);
 
  
 </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var editLessonButtons = document.querySelectorAll('.edit-lesson-btn');
+        editLessonButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var lessonId = this.getAttribute('data-lesson-id');
+                window.location.href = 'edit_lesson.php?lesson_id=' + lessonId;
+            });
+        });
+    });
+</script>
+
 
     <script src="../Script/Admin.js"></script>
            

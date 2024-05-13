@@ -21,7 +21,7 @@
         </video>
     <div class="container">
         <h2><i class="fas fa-unlock-alt icon"></i>Forgot Password</h2>
-        <form id="forgotPasswordForm" action="../../Backend/User-AccountVerification/sendpassword.php" method="post" title="Forgot Password Form">
+        <form id="forgotPasswordForm" action="../../Backend/User-AccountVerification/sendpassword.php" method="POST" title="Forgot Password Form">
             <div class="input-box">
                 <span class="details">Enter your email </span>
                 <input type="text" name="email" id="email" placeholder="Email">

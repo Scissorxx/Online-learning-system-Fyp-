@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <?php else: ?>
 
-          <img src="Image/default.jpg" alt="User Logo" style="width: 100px; height: 100px;">
+          <img src="../../Media/Default/default.jpg" alt="User Logo" style="width: 100px; height: 100px;">
     <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
   <input type="file" name="profile_picture" id="profile_picture" style="display: none;" onchange="this.form.submit()">
   <button type="button" onclick="document.getElementById('profile_picture').click()">upload</button>

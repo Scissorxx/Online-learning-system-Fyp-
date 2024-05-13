@@ -2,7 +2,7 @@
     // Include your database connection file
     include '../../php/dbconnect.php';
 
-    $query = "SELECT e.*, u.SN, u.fullname, u.Image
+    $query = "SELECT e.*, u.SN, u.fullname, IFNULL(u.Image, 'default.jpg') AS Image
               FROM enrollment e
               JOIN userdetail u ON e.user_id = u.SN
               JOIN courses c ON e.course_id = c.course_id";
@@ -29,7 +29,7 @@
     <style> 
        .avatar {
             width: 50px;
-            height: auto;
+            height: 50px;
             border-radius: 50%;
         }
     </style>
@@ -93,7 +93,7 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>".$counter++."</td>";
-                                        echo "<td><img src='../../Media/UserImages/".$row['Image']."' class='avatar'></td>"; // Displaying user's profile image
+                                        echo "<td><img src='../../Media/default/".$row['Image']."' class='avatar'></td>"; // Displaying user's profile image
                                         echo "<td>".$row['fullname']."</td>";
                                         echo "<td>".$row['course_id']."</td>";
                                         echo "<td>".$row['course_name']."</td>";

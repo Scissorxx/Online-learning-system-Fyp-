@@ -2,7 +2,6 @@
     // Include your database connection file
     include '../../php/dbconnect.php';
     
-
     // Query to fetch payments with user details from the database
     $query = "SELECT p.*, u.Image, u.fullname as name
               FROM payments p
@@ -26,7 +25,7 @@
     <style> 
        .avatar {
             width: 50px;
-            height: auto;
+            height: 50px;
             border-radius: 50%;
         }
 
@@ -97,7 +96,7 @@
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>".$counter++."</td>";
-                                        echo "<td><img src='".$row['Image']."' class='avatar' alt='Avatar'></td>";
+                                        echo "<td><img src='".($row['Image'] ? $row['Image'] : '../../Media/Default/default.jpg')."' class='avatar' alt='Avatar'></td>";
                                         echo "<td>".$row['name']."</td>";
                                         echo "<td>".$row['product_name']."</td>";
                                         echo "<td>".$row['product_id']."</td>";

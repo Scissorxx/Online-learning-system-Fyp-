@@ -1,8 +1,8 @@
 <?php
 $errorMessage = $successMessage = "";
+include '../../php/dbconnect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../../php/dbconnect.php';
 
     $fullrname = mysqli_real_escape_string($con, $_POST["fullname"]);
     $username = mysqli_real_escape_string($con, $_POST["username"]);
@@ -67,9 +67,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
           }
             $successMessage = "Registration Successful. Please check your email to activate your account.";
-        } else {
+        }
+         else {
             $errorMessage = "Error: " . mysqli_error($con);
         }
+    }
+}
+
+
+$sql = "SELECT * FROM landingpage";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while ($row = $result->fetch_assoc()) {
+        $content_id = $row["content_id"];
+        $name = $row["Name"];
+        $heading1 = $row["heading1"];
+        $heading2 = $row["heading2"];
+        $teacher = $row["teacher"];
+        $course = $row["course"];
+        $class = $row["class"];
+        $material = $row["material"];
     }
 }
 ?>
@@ -95,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Your browser does not support the video tag.
         </video>
 <header class="header">
-    <a href="#" class="logo"></i> Online learning</a>
+<a href="Dashboard.php" class="logo"><?php echo $name; ?></a>
     <nav class="navbar">
         <a href="#home" class="hover-underline">home</a>
         <a href="#about" class="hover-underline">About us</a>
